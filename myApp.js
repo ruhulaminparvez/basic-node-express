@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/json', function (req, res) {
-    console.log({ "message": "Hello json" })
+    console.log({ message: "Hello json" })
     res.json({ message: "Hello json" });
 });
 
