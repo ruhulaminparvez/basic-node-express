@@ -30,4 +30,13 @@ app.get('/json', (req, res) => {
     res.json({ message });
 });
 
+// ✅ Current Time to Object
+app.get('/now', (req, res, next) => {
+    req.time = new Date().toString(); // Add current time to request object
+    next(); // Pass control to next function
+}, (req, res) => {
+    res.json({ time: req.time }); // Respond with JSON
+});
+
+
 module.exports = app;
