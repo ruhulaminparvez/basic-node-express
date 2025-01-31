@@ -38,5 +38,10 @@ app.get('/now', (req, res, next) => {
     res.json({ time: req.time }); // Respond with JSON
 });
 
+// ✅ Extract the route parameter
+app.get('/:word/echo', (req, res) => {
+    const { word } = req.params; // Extract the route parameter
+    res.json({ echo: word }); // Respond with JSON
+});
 
 module.exports = app;
