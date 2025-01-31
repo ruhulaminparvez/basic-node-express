@@ -50,5 +50,13 @@ app.get('/name', (req, res) => {
     res.json({ name: `${first} ${last}` }); // Combine and respond
 });
 
+// ✅ POST /name to accept data from a form
+const bodyParser = require('body-parser'); // Import body-parser
+app.use(bodyParser.urlencoded({ extended: false })); // Parse URL-encoded bodies
+
+app.post('/name', (req, res) => {
+    const { name, age } = req.body;  // Extract the POST data from the body
+    res.json({ name, age });  // Respond with the JSON object containing the name and age
+});
 
 module.exports = app;
