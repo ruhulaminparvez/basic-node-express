@@ -2,8 +2,10 @@ require('dotenv').config(); // Load .env variables
 
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser'); // Import body-parser
 
-console.log("Hello World");
+// ✅ Middleware to parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // ✅ Root-level logger middleware (MUST be first)
 app.use((req, res, next) => {
@@ -50,13 +52,11 @@ app.get('/name', (req, res) => {
     res.json({ name: `${first} ${last}` }); // Combine and respond
 });
 
-// ✅ POST /name to accept data from a form
-const bodyParser = require('body-parser'); // Import body-parser
-app.use(bodyParser.urlencoded({ extended: false })); // Parse URL-encoded bodies
-
+// ✅ POST /name to accept data from the form and return full name
 app.post('/name', (req, res) => {
-    const { name, age } = req.body;  // Extract the POST data from the body
-    res.json({ name, age });  // Respond with the JSON object containing the name and age
+    const { first, last } = req.body;  // Extract the POST data from the body
+    res.json({ name: `${first} ${last}` });  // Respond with the JSON object containing the full name
 });
 
+// Export the app to make it available for other files or testing
 module.exports = app;
