@@ -5,21 +5,21 @@ const app = express();
 
 console.log("Hello World");
 
-// ✅ Ensure middleware is the first thing after app initialization
+// ✅ Root-level logger middleware (MUST be first)
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.path} - ${req.ip}`);
-    next();
+    next(); // Move to the next middleware/route handler
 });
 
-// Serve Static Files First
+// ✅ Serve Static Files
 app.use('/public', express.static(__dirname + '/public'));
 
-// Root Route
+// ✅ Root Route
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-// JSON API Route
+// ✅ JSON API Route
 app.get('/json', (req, res) => {
     let message = "Hello json";
 
