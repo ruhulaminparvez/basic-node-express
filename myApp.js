@@ -3,7 +3,9 @@ require('dotenv').config(); // Load .env variables
 const express = require('express');
 const app = express();
 
-// Root-Level Logger Middleware
+console.log("Hello World");
+
+// ✅ Ensure middleware is the first thing after app initialization
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.path} - ${req.ip}`);
     next();
@@ -11,8 +13,6 @@ app.use((req, res, next) => {
 
 // Serve Static Files First
 app.use('/public', express.static(__dirname + '/public'));
-
-console.log("Hello World");
 
 // Root Route
 app.get('/', (req, res) => {
