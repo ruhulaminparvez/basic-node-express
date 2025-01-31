@@ -44,4 +44,11 @@ app.get('/:word/echo', (req, res) => {
     res.json({ echo: word }); // Respond with JSON
 });
 
+// ✅ Extract first and last from query string
+app.get('/name', (req, res) => {
+    const { first, last } = req.query; // Extract first and last from query string
+    res.json({ name: `${first} ${last}` }); // Combine and respond
+});
+
+
 module.exports = app;
